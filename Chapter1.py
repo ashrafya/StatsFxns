@@ -4,6 +4,7 @@ from scipy import stats
 import pandas as pd
 import matplotlib as plt
 from collections import Counter
+import plotly.express as px
 
 def mean(data):
     '''
@@ -35,7 +36,7 @@ def trimmed_mean(data, cap):
     '''
     return stats.trim_mean(data, cap)
    
-def range(data):
+def range_mine(data):
     '''
     returns range of a data set
     '''
@@ -71,9 +72,44 @@ def plot_histogram(data):
     recounted = Counter(data)
     plt.pyplot.hist(data, bins=len(recounted))  # bins is the length of the dictionary, or how many frequency units there are
     plt.pyplot.ylabel('No of times')
-    plt.pyplot.show()   
+    plt.pyplot.show()
     
+    
+def relativeFreq(data):
+    '''
+    returns a relative frequency graph
+    '''
+    a = np.array(data) # convert to np array
+    recounted = Counter(data) # count how many colunns to have by making dict
+    res = stats.relfreq(a, numbins=len(recounted))
+    res.frequency #freq array
+    
+    x = res.lowerlimit + np.linspace(0, res.binsize*res.frequency.size, 
+                                     res.frequency.size)
+    fig = plt.pyplot.figure(figsize=(5, 4))
+    ax = fig.add_subplot(1, 1, 1)
+    ax.bar(x, res.frequency, width=res.binsize)
+    ax.set_title('Relative frequency histogram')
+    ax.set_xlim([x.min(), x.max()])
+    plt.show()    
+    
+    
+def dotPlot(data):
+    '''
+    returns dot plot of data
+    '''
+    indices =[]
+    new = sorted(data)
+    print(new)
+    recounted = Counter(new)
+    for val in recounted:
+        for i in range(recounted[val]):
+            indices.append(i+1)    
+    plt.pyplot.scatter(new, indices)
+    plt.pyplot.ylim(0,5)
+    plt.pyplot.show()
+
+C20 = [2.07, 2.14, 2.22, 2.03, 2.21, 2.03, 2.05, 2.18, 2.09, 2.14, 2.11, 2.02]
+C45= [2.52, 2.15, 2.49, 2.03, 2.37, 2.05, 1.99, 2.42, 2.08, 2.42, 2.29, 2.01]    
     
 
-y = [4, 8, 6, 5, 3, 2, 8, 9, 2, 5]
-x = [2, -2, 3, 6, 9, 4, 5, -1, 0]
