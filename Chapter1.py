@@ -109,7 +109,28 @@ def dotPlot(data):
     plt.pyplot.ylim(0,5)
     plt.pyplot.show()
 
+
 def get_percentile(data, number):
+    '''
+    gets percentile of data
+    - can set it to 25 to get first quartile
+    - set to 50 for median
+    - set to 75 for third quartile
+    '''
     return np.percentile(data, number)
+
+
+def makeBoxPlot(data):
+    '''
+    - Outputs a box plot using matplotlib
+    - box is the interquartiel range
+    - the dots are the outliers (result of being mre than 1.5 times thes distance of the box outside the box
+    - the whiskers end at the minimum and maximum respectively
+    '''
+    plt.pyplot.boxplot(data, vert=False)  # make it horizontal as well
+    plt.pyplot.show()
+    
+
+    
 
 f1 = [3,1,4,1,5,9,2,6,5,3,5,8]
