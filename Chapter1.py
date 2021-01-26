@@ -91,7 +91,7 @@ def relativeFreq(data):
     ax.bar(x, res.frequency, width=res.binsize)
     ax.set_title('Relative frequency histogram')
     ax.set_xlim([x.min(), x.max()])
-    plt.show()    
+    plt.pyplot.show()    
     
     
 def dotPlot(data):
@@ -109,7 +109,7 @@ def dotPlot(data):
     plt.pyplot.ylim(0,5)
     plt.pyplot.show()
 
-C20 = [2.07, 2.14, 2.22, 2.03, 2.21, 2.03, 2.05, 2.18, 2.09, 2.14, 2.11, 2.02]
-C45= [2.52, 2.15, 2.49, 2.03, 2.37, 2.05, 1.99, 2.42, 2.08, 2.42, 2.29, 2.01]    
-    
+def get_percentile(data, number):
+    return np.percentile(data, number)
 
+f1 = [3,1,4,1,5,9,2,6,5,3,5,8]
